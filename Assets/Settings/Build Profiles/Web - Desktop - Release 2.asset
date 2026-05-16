@@ -18,7 +18,7 @@ MonoBehaviour:
   m_PlatformId: 84a3bb9e7420477f885e98145999eb20
   m_PlatformBuildProfile:
     rid: 4281676756542816345
-  m_OverrideGlobalSceneList: 1
+  m_OverrideGlobalSceneList: 0
   m_Scenes:
   - m_enabled: 1
     m_path: Assets/Saves/4_19.unity
@@ -95,6 +95,7 @@ MonoBehaviour:
     - line: '|   androidStartInFullscreen: 1'
     - line: '|   androidRenderOutsideSafeArea: 1'
     - line: '|   androidUseSwappy: 0'
+    - line: '|   androidDisplayOptions: 1'
     - line: '|   androidBlitType: 0'
     - line: '|   androidResizeableActivity: 1'
     - line: '|   androidDefaultWindowWidth: 1920'
@@ -158,7 +159,6 @@ MonoBehaviour:
     - line: '|   switchNVNMaxPublicSamplerIDCount: 0'
     - line: '|   switchMaxWorkerMultiple: 8'
     - line: '|   switchNVNGraphicsFirmwareMemory: 32'
-    - line: '|   switchGraphicsJobsSyncAfterKick: 1'
     - line: '|   vulkanNumSwapchainBuffers: 3'
     - line: '|   vulkanEnableSetSRGBWrite: 0'
     - line: '|   vulkanEnablePreTransform: 1'
@@ -855,12 +855,12 @@ MonoBehaviour:
     - line: '|   webGLMemoryLinearGrowthStep: 16'
     - line: '|   webGLMemoryGeometricGrowthStep: 0.2'
     - line: '|   webGLMemoryGeometricGrowthCap: 96'
+    - line: '|   webGLEnableWebGPU: 0'
     - line: '|   webGLPowerPreference: 2'
     - line: '|   webGLWebAssemblyTable: 1'
     - line: '|   webGLWebAssemblyBigInt: 1'
     - line: '|   webGLCloseOnQuit: 0'
     - line: '|   webWasm2023: 1'
-    - line: '|   webEnableSubmoduleStrippingCompatibility: 0'
     - line: '|   scriptingDefineSymbols: {}'
     - line: '|   additionalCompilerArguments: {}'
     - line: '|   platformArchitecture: {}'
@@ -977,8 +977,6 @@ MonoBehaviour:
     - line: '|   insecureHttpOption: 0'
     - line: '|   androidVulkanDenyFilterList: []'
     - line: '|   androidVulkanAllowFilterList: []'
-    - line: '|   androidVulkanDeviceFilterListAsset: {instanceID: 0}'
-    - line: '|   d3d12DeviceFilterListAsset: {instanceID: 0}'
     - line: '| '
   references:
     version: 2
