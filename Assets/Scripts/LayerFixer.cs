@@ -6,16 +6,12 @@ public class LayerFixer : MonoBehaviour
 
     void Update()
     {
+        // Only run this if the avatar has finished loading
         ReadyPlayerAvatar avatar = GetComponent<ReadyPlayerAvatar>();
         if (avatar != null && avatar.isLoaded())
         {
-            int layer = LayerMask.NameToLayer(targetLayer);
-            if (layer >= 0)
-            {
-                SetLayerRecursive(gameObject, layer);
-            }
-
-            this.enabled = false;
+            SetLayerRecursive(gameObject, LayerMask.NameToLayer(targetLayer));
+            this.enabled = false; // Turn off this script once fixed
         }
     }
 

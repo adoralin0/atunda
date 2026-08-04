@@ -20,28 +20,8 @@ MonoBehaviour:
     rid: 4281676756542816345
   m_OverrideGlobalSceneList: 1
   m_Scenes:
-  - m_enabled: 0
-    m_path: Assets/Saves/4_19.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/6_8_original.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/6_13_fullyworking.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/7_2_edited.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/7_3_edited.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/7_3_original.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/7_10_edit.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/7_13_edit.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/7_21_edited.unity
-  - m_enabled: 0
-    m_path: Assets/Saves/7_25_edited.unity
   - m_enabled: 1
-    m_path: Assets/Saves/7_26_edited.unity
+    m_path: Assets/Saves/4_19.unity
   m_ScriptingDefines: []
   m_PlayerSettingsYaml:
     m_Settings:
@@ -868,7 +848,7 @@ MonoBehaviour:
     - line: '|   webGLWasmArithmeticExceptions: 0'
     - line: '|   webGLLinkerTarget: 1'
     - line: '|   webGLThreadsSupport: 0'
-    - line: '|   webGLDecompressionFallback: 0'
+    - line: '|   webGLDecompressionFallback: 1'
     - line: '|   webGLInitialMemorySize: 32'
     - line: '|   webGLMaximumMemorySize: 2048'
     - line: '|   webGLMemoryGrowthMode: 2'

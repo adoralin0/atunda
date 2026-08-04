@@ -78,30 +78,40 @@ public class PoseMemory : MonoBehaviour, MotionTrackingPose
         
         j=(j)%(BufferSize);
 
-        switch(landmark)
-        {
+        switch(landmark){
             case Landmark.PELVIS:
-                return Pelvis[j];
+            return Pelvis[j]; 
+            break;
             case Landmark.SHOULDER_CENTER:
-                return Spine[j];
+            return Spine[j]; 
+            break;
             case Landmark.RIGHT_SHOULDER:
-                return RightShoulder[j];
+            return RightShoulder[j]; 
+            break;
             case Landmark.LEFT_SHOULDER:
-                return LeftShoulder[j];
+            return LeftShoulder[j]; 
+            break;
             case Landmark.RIGHT_ELBOW:
-                return RightForeArm[j];
+            return RightForeArm[j]; 
+            break;
             case Landmark.LEFT_ELBOW:
-                return LeftForeArm[j];
+            return LeftForeArm[j]; 
+            break;
             case Landmark.RIGHT_HIP:
-                return RightUpLeg[j];
+            return RightUpLeg[j]; 
+            break;
             case Landmark.LEFT_HIP:
-                return LeftUpLeg[j];
+            return LeftUpLeg[j]; 
+            break;
             case Landmark.RIGHT_KNEE:
-                return RightLeg[j];
+            return RightLeg[j]; 
+            break;
             case Landmark.LEFT_KNEE:
-                return LeftLeg[j];
+            return LeftLeg[j]; 
+            break;
             default:
-                return Quaternion.identity;
+            return Quaternion.identity;
+            break;
         }
     }
 
