@@ -22,12 +22,18 @@ public class UPose : MonoBehaviour, MotionTrackingPose
     private ServerUDP server;
 
     private Body body;
+    private volatile bool isRunning;
 
     private long frame_counter=0;
 
     public Transform GetLandmark(Landmark mark)
     {
-        return body.instances[(int)mark].transform ;
+        if (body == null || body.instances == null)
+        {
+            return null;
+        }
+
+        return body.instances[(int)mark].transform;
     }
 
     private void Start()
@@ -49,6 +55,7 @@ public class UPose : MonoBehaviour, MotionTrackingPose
         lineRenderer.endColor = Color.cyan;
 
         body = new Body(bodyParent,linePrefab,landmarkScale);
+        isRunning = true;
 
 
         Thread t = new Thread(new ThreadStart(Run));
@@ -56,6 +63,11 @@ public class UPose : MonoBehaviour, MotionTrackingPose
     }
     private void Update()
     {
+        if (body == null)
+        {
+            return;
+        }
+
         UpdateBody(body);
     }
 
@@ -248,6 +260,11 @@ public class UPose : MonoBehaviour, MotionTrackingPose
 
     private void UpdateBody(Body b)
     {
+        if (b == null)
+        {
+            return;
+        }
+
         if(b.format==1){
             for (int i = 0; i < LANDMARK_COUNT; ++i)
             {
@@ -295,6 +312,11 @@ public class UPose : MonoBehaviour, MotionTrackingPose
 
     public Quaternion GetRotation(Landmark i)
     {
+        if (body == null)
+        {
+            return Quaternion.identity;
+        }
+
         return body.rotations[(int)i];
     }
     public Quaternion GetRotation(Landmark i,int Delay)
@@ -303,6 +325,11 @@ public class UPose : MonoBehaviour, MotionTrackingPose
     }
     public void SetVisible(bool visible)
     {
+        if (bodyParent == null)
+        {
+            return;
+        }
+
         bodyParent.gameObject.SetActive(visible);
     }
 
@@ -358,17 +385,23 @@ public class UPose : MonoBehaviour, MotionTrackingPose
         m[15]=Landmark.LEFT_ELBOW;
         m[16]=Landmark.LEFT_WRIST;
 
-        while (true)
+        while (isRunning)
         {
             try
             {
+                ServerUDP localServer = server;
                 Body h = body;
+                if (localServer == null || h == null)
+                {
+                    break;
+                }
+
                 var len = 0;
                 var str = "";
 
                 
-                if(server.HasMessage())
-                    str = server.GetMessage();
+                if(localServer.HasMessage())
+                    str = localServer.GetMessage();
                 else continue;
                 len = str.Length;
                 
@@ -445,9 +478,13 @@ public class UPose : MonoBehaviour, MotionTrackingPose
 
     private void OnDisable()
     {
-        print("server disconnected.");    
-        server.Disconnect();
-    
+        print("server disconnected.");
+        isRunning = false;
+        if (server != null)
+        {
+            server.Disconnect();
+            server = null;
+        }
     }
 
     const int LANDMARK_COUNT = 38;

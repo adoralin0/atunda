@@ -185,7 +185,6 @@ public class ArcherInteraction : MonoBehaviour
     public Vector3 object2Scale = new Vector3(1, 1, 1);
 
     Transform stringPosition;
-    float animationY = 0;
     bool isAnimated = false;
     Vector3 arrow_direction;
     Vector3 arrow_position;

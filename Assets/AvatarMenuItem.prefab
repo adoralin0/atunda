@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8485107032904870360}
   - component: {fileID: 8020486885622363080}
   - component: {fileID: 230226680806751269}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: AvatarMenuItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58,24 +58,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1776956239783861746}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.RawImage
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 8400000, guid: 1b96b821290f3f241af7299cd9a82cbe, type: 2}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &8485107032904870360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,9 +91,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fec7ffabedd76b428dc56b6bef0ac29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AvatarUIItem
-  previewDancer: {fileID: 0}
   realDancer: {fileID: 0}
   jsonFileName: Afefe_0
+  selectedLabelColor: {r: 1, g: 0.92, b: 0.35, a: 1}
+  selectedBorderColor: {r: 1, g: 1, b: 1, a: 1}
+  selectedBorderWidth: 6
 --- !u!114 &8020486885622363080
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +141,7 @@ GameObject:
   - component: {fileID: 3563507926141378827}
   - component: {fileID: 3411505486014424893}
   - component: {fileID: 3618242573225034055}
-  m_Layer: 7
+  m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -192,8 +197,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Afefe_0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f06423a59266b87498c4d3b4d16d2d1b, type: 2}
+  m_sharedMaterial: {fileID: 5766532097328213757, guid: f06423a59266b87498c4d3b4d16d2d1b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -217,8 +222,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

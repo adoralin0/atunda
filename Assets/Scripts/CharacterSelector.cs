@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[DefaultExecutionOrder(-150)]
 public class CharacterSelector : MonoBehaviour
 {
     [Header("Setup")]
@@ -8,24 +9,42 @@ public class CharacterSelector : MonoBehaviour
     
     private int currentCharacterIndex = 0;
 
+    void Awake()
+    {
+        if (previewParent != null && previewParent.GetComponent<PreviewAvatarStage>() == null)
+        {
+            previewParent.gameObject.AddComponent<PreviewAvatarStage>();
+        }
+
+        PreviewAvatarStage.TryInitializeFrom(previewParent);
+        PreviewDanceStickFigure.TryInitializeFrom(previewParent);
+    }
+
     void Start()
     {
         UpdateCharacterVisibility();
+        RefreshMenuBindings();
     }
 
     public void NextCharacter()
     {
         StopCurrentDancer();
+        AvatarUIItem.ClearHoverPreview();
         currentCharacterIndex = (currentCharacterIndex + 1) % transform.childCount;
         UpdateCharacterVisibility();
+        RefreshMenuBindings();
+        AvatarUIItem.RestoreSelectionAfterCharacterSwap();
     }
 
     public void PreviousCharacter()
     {
         StopCurrentDancer();
+        AvatarUIItem.ClearHoverPreview();
         currentCharacterIndex--;
         if (currentCharacterIndex < 0) currentCharacterIndex = transform.childCount - 1;
         UpdateCharacterVisibility();
+        RefreshMenuBindings();
+        AvatarUIItem.RestoreSelectionAfterCharacterSwap();
     }
 
     private void StopCurrentDancer()
@@ -66,19 +85,52 @@ public class CharacterSelector : MonoBehaviour
             }
         }
 
-        // 3. CRITICAL: Update every box in the menu to point to the new preview character
-        if (menuContent != null && newMainDancer != null && newPreviewDancer != null)
+        RefreshMenuBindings();
+    }
+
+    /// <summary>Call after DanceMenuGenerator builds the menu so each item uses the active avatars.</summary>
+    public void RefreshMenuBindings()
+    {
+        if (menuContent == null)
         {
-            foreach (Transform box in menuContent)
-            {
-                AvatarUIItem item = box.GetComponent<AvatarUIItem>();
-                if (item != null)
-                {
-                    item.realDancer = newMainDancer;
-                    item.previewDancer = newPreviewDancer;
-                }
-            }
-            Debug.Log("<color=yellow>Menu updated to: </color>" + newPreviewDancer.gameObject.name);
+            return;
         }
+
+        AvatarAnimationPlayer mainDancer = null;
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (i == currentCharacterIndex)
+            {
+                mainDancer = transform.GetChild(i).GetComponent<AvatarAnimationPlayer>();
+                break;
+            }
+        }
+
+        if (mainDancer == null)
+        {
+            return;
+        }
+
+        foreach (Transform box in menuContent)
+        {
+            AvatarUIItem item = box.GetComponent<AvatarUIItem>();
+            if (item != null)
+            {
+                item.realDancer = mainDancer;
+                item.RefreshPreviewImage();
+            }
+        }
+
+        if (previewParent != null && previewParent.childCount > currentCharacterIndex)
+        {
+            AvatarAnimationPlayer previewDancer = previewParent.GetChild(currentCharacterIndex).GetComponent<AvatarAnimationPlayer>();
+            if (previewDancer != null)
+            {
+                PreviewDanceStickFigure.AlignToPreviewAvatar(previewDancer.transform);
+            }
+        }
+
+        Debug.Log("CharacterSelector: menu wired to main '" + mainDancer.gameObject.name + "'.");
     }
 }

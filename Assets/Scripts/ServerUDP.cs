@@ -40,8 +40,12 @@ class ServerUDP
     }
     public void Disconnect()
     {
-        server.Close();
         open = false;
+        if (server != null)
+        {
+            server.Close();
+            server = null;
+        }
     }
     public void StartListeningAsync()
     {
@@ -58,6 +62,11 @@ class ServerUDP
         {
             try
             {
+                if (server == null)
+                {
+                    break;
+                }
+
                 buffer = server.Receive(ref endPoint);
                 if (buffer.Length > 0)
                 {
@@ -78,10 +87,16 @@ class ServerUDP
             }
             catch (SocketException ex)
             {
-                print("Connection lost.");
-                System.Threading.Thread.Sleep(1000);
+                if (!open)
+                {
+                    break;
+                }
 
-                    StartListening();
+                print("Connection lost: " + ex.Message);
+                break;
+            }
+            catch (ObjectDisposedException)
+            {
                 break;
             }
         }
